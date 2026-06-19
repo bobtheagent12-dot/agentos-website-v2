@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #faf9f6;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f3ee;
+  --color-elevated: #ecebe4;
+  --color-border: #e7e5dd;
+  --color-border-strong: #d6d3c8;
+  --color-ink: #1c1b18;
+  --color-ink-dim: #57564f;
+  --color-ink-muted: #8a887e;
+  --color-accent: #4f46e5;
+  --color-accent-bright: #4338ca;
+  --color-accent-soft: rgba(79, 70, 229, 0.08);
+  --color-accent-ring: rgba(79, 70, 229, 0.28);
+  --color-good: #059669;
+  --color-warn: #c2410c;
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, Consolas, monospace;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* Selection */
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-bright);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-muted);
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: -1px -1px;
+}
+
+/* Radial fade for hero */
+.radial-fade {
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(79, 70, 229, 0.07), transparent 60%);
+}
+
+/* Animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes step-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--color-accent-soft);
+  }
+  50% {
+    box-shadow: 0 0 0 6px var(--color-accent-soft);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Operating loop animation */
+.loop-step {
+  opacity: 0.25;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.loop-step.active {
+  opacity: 1;
+}
+.loop-step.active .loop-num {
+  color: var(--color-accent-bright);
+}
+
+/* Connector line animation */
+.loop-connector {
+  background: var(--color-border-strong);
+  position: relative;
+  overflow: hidden;
+}
+.loop-connector::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.loop-connector.active::after {
+  width: 100%;
+}
+
+/* Card hover */
+.card-hover {
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+
+/* Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--color-accent);
+  transition: background 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--color-accent-bright);
+  border-color: var(--color-accent-bright);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--color-border-strong);
+  transition: border-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: var(--color-ink-dim);
+  color: #fff;
+}
+
+/* Link arrow animation */
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.15s ease;
+}
+.arrow-link:hover {
+  gap: 10px;
+}
+
+/* Specimen card monospace */
+.specimen-mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Architecture diagram nodes */
+.arch-node {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface-2);
+  border-radius: 8px;
+  padding: 16px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.arch-node:hover {
+  border-color: var(--color-accent);
+  background: var(--color-elevated);
+}
