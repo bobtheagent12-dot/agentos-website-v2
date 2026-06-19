@@ -168,7 +168,7 @@ export default function HomePage() {
               </p>
               <p className="text-[15px] leading-relaxed text-ink-dim">
                 That is the durable part. Models improve. Providers change. The
-                control layer keeps the firm's context, governance, and workflows
+                control layer keeps the firm&apos;s context, governance, and workflows
                 intact.
               </p>
               <Link href="/product" className="mt-2 text-[14px] font-medium text-accent-bright arrow-link">
